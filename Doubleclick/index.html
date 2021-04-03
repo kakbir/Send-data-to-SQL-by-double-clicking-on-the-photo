@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            max-height:200px;
+        }
+    </style>
+
+<script src="sweetalert.min.js"></script>
+<link rel="stylesheet" href="sweetalert.min.css">
+</head>
+<body>
+    <div class="image">
+            <input type="hidden" name="data" value="220" class="i3">
+        <input type="hidden" name="data" value="ağaç" class="i1">
+        <img src="img/agac.jpeg" alt="">
+    </div>
+    <div class="image">
+            <input type="hidden" name="data" value="250" class="i3">
+        <input type="hidden" name="data" value="araba" class="i1">
+        <img src="img/araba.jpg" alt="">
+    </div>
+    <div class="image">
+                <input type="hidden" name="data" value="120" class="i3">
+        <input type="hidden" name="data" value="20" class="i1">
+        <input type="hidden" name="data2" value="20" class="i2">
+        <img src="img/ucak.jpg" alt="">
+
+    </div>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+        $(function(){
+            $(".image").dblclick(function(){
+                let i1 = $(this).find(".i1").val() || "";
+                let i2 = $(this).find(".i2").val() || "";
+                   let i3 = $(this).find(".i3").val() || "";
+
+                let img = $(this).find("img").attr('src');
+                $.ajax({
+					type: "POST",
+					url: "ajax.php",
+					data: {i1,i2,i3,img},
+					success: function(x){
+						if(x === "1") sweetAlert('Teşekkürler','Onaylandı','success');
+                        else  sweetAlert('Bakiyeniz Yetersiz','Hata','error')
+					}
+				});
+            })
+        })
+    </script>
+</body>
+</html>
